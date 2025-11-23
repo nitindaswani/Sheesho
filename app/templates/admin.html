@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <title>Admin</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #333;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .header {
+        background-color: #ffffff;
+        padding: 20px 40px;
+        border-bottom: 1px solid #dee2e6;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .header-logo {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #d63384;
+        text-decoration: none;
+      }
+
+      .header-nav a {
+        font-size: 1.1rem;
+        text-decoration: none;
+        color: #0d6efd;
+        background-color: transparent;
+        border: 1px solid #0d6efd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        margin-left: 10px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .header-nav a:hover {
+        background-color: #0d6efd;
+        color: #ffffff;
+      }
+
+      h1.page-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #343a40;
+        margin-bottom: 30px;
+      }
+
+      .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        padding: 20px 0;
+      }
+
+      .card {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        width: 200px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-img {
+        height: 150px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .card-body {
+        padding: 15px;
+      }
+
+      .card-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 0 0 5px 0;
+      }
+
+      .card-price {
+        font-size: 1rem;
+        color: #555;
+        margin: 0 0 15px 0;
+      }
+
+      .card-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .btn {
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        text-align: center;
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn-danger {
+        background-color: #dc3545;
+        color: white;
+      }
+      .btn-danger:hover {
+        background-color: #bb2d3b;
+      }
+
+      .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #5c636a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <a class="header-logo" href="/">Sheesho</a>
+      <nav class="header-nav">
+        <a href="/">Home Page</a>
+        <a href="/view_orders">View Orders</a>
+        <a href="/add_pro/">Add Product</a>
+      </nav>
+    </div>
+
+    <div class="container">
+      <h1 class="page-title">Admin Dashboard</h1>
+
+      <div class="product-grid">
+        {%for pro in products%}
+        <div class="card">
+          <img class="card-img" src="/media/{{pro.pro_image}}" alt="Image" />
+          <div class="card-body">
+            <h4 class="card-title">{{pro.pro_name}}</h4>
+            <p class="card-price">${{pro.pro_price}}</p>
+            <div class="card-actions">
+              <a href="/update_pro/{{pro.pro_id}}" class="btn btn-secondary"
+                >Update</a
+              >
+              <a href="/delete_pro/{{pro.pro_id}}" class="btn btn-danger"
+                >Delete</a
+              >
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+  </body>
+</html>
