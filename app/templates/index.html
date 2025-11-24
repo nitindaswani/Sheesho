@@ -1,14 +1,78 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Sheesho</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheesho - Your One-Stop Shop</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
-        margin: 0;
-        padding: 0;
         background-color: #f8f9fa;
         color: #333;
+        line-height: 1.6;
+      }
+
+      .header {
+        background-color: #ffffff;
+        padding: 20px 5%;
+        border-bottom: 1px solid #dee2e6;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #d63384;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .header-logo:hover {
+        color: #b02968;
+      }
+
+      .search-bar {
+        display: flex;
+        gap: 10px;
+        flex: 1;
+        max-width: 500px;
+        margin: 0 20px;
+      }
+
+      .search-bar input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 0.95rem;
+      }
+
+      .search-bar button {
+        padding: 10px 20px;
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+      }
+
+      .search-bar button:hover {
+        background-color: #0b5ed7;
       }
 
       .container {
@@ -16,32 +80,31 @@
         max-width: 1200px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       }
 
-      .header {
-        background-color: #ffffff;
-        padding: 20px 40px;
-        border-bottom: 1px solid #dee2e6;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
-      .header-logo {
+      .hero h1 {
         font-size: 2.5rem;
-        font-weight: bold;
-        color: #d63384;
-        text-decoration: none;
+        margin-bottom: 15px;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        opacity: 0.95;
       }
 
       .product-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         gap: 25px;
         padding: 20px 0;
       }
@@ -50,64 +113,101 @@
         background: #ffffff;
         border: 1px solid #e0e0e0;
         border-radius: 8px;
-        width: 200px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         transition: box-shadow 0.3s ease, transform 0.3s ease;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
       }
 
       .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
       }
 
       .card-img {
-        height: 150px;
+        height: 180px;
         width: 100%;
         object-fit: cover;
       }
 
       .card-body {
         padding: 15px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
       }
 
       .card-title {
         font-size: 1.15rem;
         font-weight: 600;
-        margin: 0 0 5px 0;
+        margin: 0 0 8px 0;
+        color: #212529;
       }
 
       .card-price {
-        font-size: 1rem;
-        color: #555;
+        font-size: 1.25rem;
+        color: #198754;
+        font-weight: 700;
         margin: 0 0 15px 0;
       }
 
       .card-actions {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
+        margin-top: auto;
       }
 
       .btn {
+        display: inline-block;
         text-decoration: none;
-        font-size: 0.9rem;
-        padding: 8px 12px;
+        font-size: 0.95rem;
+        padding: 10px 16px;
         border-radius: 5px;
         border: none;
         cursor: pointer;
         font-weight: 500;
         text-align: center;
-        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        transition: all 0.2s ease;
+        width: 100%;
       }
 
       .btn-primary {
         background-color: #0d6efd;
         color: white;
       }
+
       .btn-primary:hover {
         background-color: #0b5ed7;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(13, 110, 253, 0.3);
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 40px 0;
+      }
+
+      .pagination a,
+      .pagination span {
+        padding: 8px 12px;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #0d6efd;
+        transition: all 0.2s ease;
+      }
+
+      .pagination a:hover {
+        background-color: #0d6efd;
+        color: white;
+      }
+
+      .pagination .current {
+        background-color: #0d6efd;
+        color: white;
+        border-color: #0d6efd;
       }
 
       .footer {
@@ -115,55 +215,137 @@
         color: #f8f9fa;
         text-align: center;
         padding: 40px 20px;
-        margin-top: 40px;
+        margin-top: 60px;
       }
 
       .footer h4 {
         margin: 0 0 10px 0;
         font-size: 1.2rem;
       }
+
       .footer p {
         margin: 5px 0;
         color: #ced4da;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6c757d;
+      }
+
+      .empty-state h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          gap: 15px;
+          padding: 15px;
+        }
+
+        .search-bar {
+          max-width: 100%;
+          margin: 0;
+        }
+
+        .header-logo {
+          font-size: 1.8rem;
+        }
+
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 15px;
+        }
+
+        .card-img {
+          height: 140px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
     <div class="header">
       <a class="header-logo" href="/">Sheesho</a>
+      <form class="search-bar" method="get" action="/">
+        <input
+          type="text"
+          name="search"
+          placeholder="Search products..."
+          value="{{search_query}}"
+        />
+        <button type="submit">Search</button>
+      </form>
     </div>
 
     <div class="container">
-      <div style="text-align: center; margin-bottom: 30px">
-        <h2>Welcome to Sheesho!</h2>
+      <div class="hero">
+        <h1>Welcome to Sheesho!</h1>
         <p>Your one-stop shop for everything you need.</p>
       </div>
 
+      {% if products %}
       <div class="product-grid">
-        {%for pro in products%}
+        {% for pro in products %}
         <div class="card">
-          <img class="card-img" src="/media/{{pro.pro_image}}" alt="Image" />
+          <img class="card-img" src="/media/{{pro.pro_image}}" alt="{{pro.pro_name}}" />
           <div class="card-body">
             <h4 class="card-title">{{pro.pro_name}}</h4>
             <p class="card-price">${{pro.pro_price}}</p>
             <div class="card-actions">
-              <a
-                href="/order_success/{{pro.pro_id}}"
-                class="btn btn-primary"
-                style="width: 100%"
-                >Buy Now</a
-              >
+              <a href="/order_success/{{pro.pro_id}}" class="btn btn-primary">
+                Buy Now
+              </a>
             </div>
           </div>
         </div>
-        {%endfor%}
+        {% endfor %}
       </div>
+
+      {% if page_obj.has_other_pages %}
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page=1{% if search_query %}&search={{search_query}}{% endif %}">&laquo; First</a>
+        <a href="?page={{page_obj.previous_page_number}}{% if search_query %}&search={{search_query}}{% endif %}">Previous</a>
+        {% endif %}
+
+        <span class="current">Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}{% if search_query %}&search={{search_query}}{% endif %}">Next</a>
+        <a href="?page={{page_obj.paginator.num_pages}}{% if search_query %}&search={{search_query}}{% endif %}">Last &raquo;</a>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% else %}
+      <div class="empty-state">
+        <h3>No products found</h3>
+        <p>{% if search_query %}Try a different search term{% else %}Check back soon for new products!{% endif %}</p>
+      </div>
+      {% endif %}
     </div>
 
     <div class="footer">
-      <h4>Contact us : xxxxxxxxxx</h4>
-      <p>Email : support@sheesho.com</p>
-      <p>Address : Sheesho Centre, Gurgaon</p>
+      <h4>Contact us: +1 (555) 123-4567</h4>
+      <p>Email: support@sheesho.com</p>
+      <p>Address: Sheesho Centre, Gurgaon</p>
     </div>
   </body>
 </html>

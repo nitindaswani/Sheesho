@@ -1,48 +1,96 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Update {{product.pro_name}}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update {{product.pro_name}} - Sheesho Admin</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
-        margin: 0;
-        padding: 0;
         background-color: #f8f9fa;
         color: #333;
+      }
+
+      .header {
+        background-color: #ffffff;
+        padding: 20px 5%;
+        border-bottom: 1px solid #dee2e6;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #d63384;
+        text-decoration: none;
+      }
+
+      .back-link {
+        color: #0d6efd;
+        text-decoration: none;
+        padding: 8px 15px;
+        border: 1px solid #0d6efd;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+      }
+
+      .back-link:hover {
+        background-color: #0d6efd;
+        color: white;
       }
 
       h1.page-title {
         text-align: center;
         font-size: 2.5rem;
         color: #343a40;
-        margin: 30px 0;
+        margin: 40px 0 30px 0;
       }
 
-      .btn {
-        text-decoration: none;
-        font-size: 0.9rem;
-        padding: 8px 12px;
+      .alert {
+        padding: 15px 20px;
+        margin: 20px auto;
+        max-width: 600px;
         border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        font-weight: 500;
-        text-align: center;
-        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        animation: slideIn 0.3s ease;
       }
 
-      .btn-primary {
-        background-color: #0d6efd;
-        color: white;
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-      .btn-primary:hover {
-        background-color: #0b5ed7;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+      .alert-success {
+        background-color: #d1e7dd;
+        color: #0a3622;
+        border: 1px solid #a3cfbb;
+      }
+
+      .alert-error {
+        background-color: #f8d7da;
+        color: #58151c;
+        border: 1px solid #f1aeb5;
       }
 
       .form-container {
-        width: 60%;
+        width: 90%;
         max-width: 600px;
-        margin: 30px auto;
+        margin: 0 auto 40px;
         padding: 30px;
         background-color: #ffffff;
         border-radius: 8px;
@@ -57,18 +105,28 @@
       }
 
       .form-container input[type="text"],
+      .form-container input[type="number"],
       .form-container textarea {
         width: 100%;
         padding: 12px;
         margin-bottom: 20px;
         border: 1px solid #ced4da;
         border-radius: 5px;
-        box-sizing: border-box; 
+        box-sizing: border-box;
         font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.2s ease;
+      }
+
+      .form-container input:focus,
+      .form-container textarea:focus {
+        outline: none;
+        border-color: #0d6efd;
       }
 
       .form-container input[type="file"] {
         margin-bottom: 20px;
+        padding: 8px;
       }
 
       .form-container textarea {
@@ -76,48 +134,141 @@
         resize: vertical;
       }
 
-      .form-container button[type="submit"] {
+      .btn {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        text-align: center;
+        transition: all 0.2s ease;
         width: 100%;
-        padding: 12px;
-        font-size: 1.1rem;
+      }
+
+      .btn-primary {
+        background-color: #0d6efd;
+        color: white;
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        background-color: #0b5ed7;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(13, 110, 253, 0.3);
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .current-image {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .current-image img {
+        max-width: 200px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          gap: 15px;
+          padding: 15px;
+        }
+
+        h1.page-title {
+          font-size: 2rem;
+        }
+
+        .form-container {
+          padding: 20px;
+        }
       }
     </style>
   </head>
   <body>
+    <div class="header">
+      <a class="header-logo" href="/">Sheesho</a>
+      <a href="/admin" class="back-link">← Back to Admin</a>
+    </div>
+
     <h1 class="page-title">Update Product</h1>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
     <form
       class="form-container"
       method="post"
       enctype="multipart/form-data"
+      onsubmit="handleSubmit(event)"
     >
-      {%csrf_token%}
-      <label for="name">Product Name</label>
+      {% csrf_token %}
+
+      <label for="name">Product Name <span style="color: #dc3545;">*</span></label>
       <input
         type="text"
         name="pro_name"
         id="name"
         value="{{product.pro_name}}"
+        required
+        maxlength="100"
       />
 
-      <label for="desc">Product Description</label>
-      <textarea type="text" name="pro_desc" id="desc">
-{{product.pro_desc}}</textarea
-      >
+      <label for="desc">Product Description <span style="color: #dc3545;">*</span></label>
+      <textarea name="pro_desc" id="desc" required>{{product.pro_desc}}</textarea>
 
-      <label for="price">Product Price</label>
+      <label for="price">Product Price ($) <span style="color: #dc3545;">*</span></label>
       <input
-        type="text"
+        type="number"
         name="pro_price"
         id="price"
         value="{{product.pro_price}}"
+        required
+        min="0.01"
+        step="0.01"
       />
 
-      <label for="image"
-        >Product Image (Leave empty to keep current image)</label
-      >
-      <input type="file" name="pro_image" id="image" /><br /><br />
+      <label>Current Image</label>
+      <div class="current-image">
+        <img src="/media/{{product.pro_image}}" alt="{{product.pro_name}}" />
+      </div>
 
-      <button type="submit" class="btn btn-primary">Update Product</button>
+      <label for="image">New Product Image (optional)</label>
+      <input type="file" name="pro_image" id="image" accept="image/*" />
+      <p style="font-size: 0.9rem; color: #6c757d; margin-top: -15px; margin-bottom: 20px;">
+        Leave empty to keep current image
+      </p>
+
+      <button type="submit" class="btn btn-primary" id="submitBtn">
+        Update Product
+      </button>
     </form>
+
+    <script>
+      function handleSubmit(event) {
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = 'Updating Product...';
+      }
+
+      setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+          alert.style.transition = 'opacity 0.5s';
+          alert.style.opacity = '0';
+          setTimeout(() => alert.remove(), 500);
+        });
+      }, 5000);
+    </script>
   </body>
 </html>
