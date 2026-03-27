@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sheesho Admin | Add Product</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="{% static 'css/add_product.css' %}">
+</head>
+
+<body>
+  <div class="background">
+    <div class="brand-badge">Sheesho Admin</div>
+    <button class="back-btn" onclick="window.history.back()">← Back</button>
+
+
+    <div class="product-card">
+      <div class="card-header">
+        <h1>Add New Product</h1>
+        <p>Add Any New Product</p>
+      </div>
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="field">
+          <label>Product Name</label>
+          <input
+            type="text"
+            name="pro_name"
+            maxlength="100"
+            placeholder="Premium Cotton T-Shirt"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label>Description</label>
+          <textarea
+            name="pro_desc"
+            placeholder="Describe your product in a customer-friendly way"
+            required
+          ></textarea>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Price (₹)</label>
+            <input
+              type="number"
+              name="pro_price"
+              step="0.01"
+              placeholder="999"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label>Stock</label>
+            <input
+              type="number"
+              name="pro_stock"
+              min="0"
+              value="0"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <select name="pro_category" required>
+            <option value="">Choose category</option>
+            {% for key, value in categories %}
+              <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field image-field">
+          <label>Product Image</label>
+          <input
+            type="file"
+            name="pro_image"
+            accept="image/*"
+            required
+          />
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Add Product
+        </button>
+      </form>
+    </div>
+  </div>
+  <footer class="admin-footer">© 2026 Sheesho Admin Panel</footer>
+</body>
+</html>

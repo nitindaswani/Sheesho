@@ -1,0 +1,325 @@
+/* ===================== BASE / GLOBAL ===================== */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ===================== HEADER (UNCHANGED) ===================== */
+.header {
+  background-color: #ffffff;
+  padding: 20px 40px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.header-nav a:hover {
+  color: #0d6efd;
+}
+
+.header-user {
+  display: flex;
+  gap: 15px;
+}
+
+.header-user a {
+  text-decoration: none;
+  color: #d63384;
+  background-color: white;
+  font-weight: 500;
+  transition: color 0.5s ease;
+  transition: background-color 0.5s ease;
+  border: 2px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.header-user a:hover {
+  color: #ffffff;
+  background-color: #d63384;
+}
+
+.header-logo {
+  cursor: default;
+  padding: 0;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #d63384;
+  text-decoration: none;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 15px;
+}
+
+/* Common link style */
+.header-actions a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.header-actions a:hover {
+  background-color: #f2f2f2;
+}
+
+/* Logout button special styling */
+.header-actions .logout {
+  color: #d63384;
+  border: 1px solid #d63384;
+}
+
+/* Logout hover */
+.header-actions .logout:hover {
+  background-color: #d63384;
+  color: #ffffff;
+}
+
+/* ===================== FOOTER (UNCHANGED) ===================== */
+.sheesho-footer {
+  background: linear-gradient(135deg, #1f1f2e, #2b2b44);
+  color: #fff;
+  padding: 60px 20px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+}
+
+.footer-brand h2 {
+  font-size: 32px;
+  color: #d63384;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  font-size: 14px;
+  color: #cfcfe6;
+  line-height: 1.6;
+}
+
+.footer-section h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #ffffff;
+  position: relative;
+}
+
+.footer-section h3::after {
+  content: "";
+  width: 40px;
+  height: 3px;
+  background: #d63384;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  border-radius: 5px;
+}
+
+.footer-section p {
+  font-size: 14px;
+  color: #cfcfe6;
+  margin-bottom: 8px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-socials a {
+  font-size: 22px;
+  background: #d63384;
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.footer-socials a:hover {
+  background: #d63384;
+  transform: scale(1.12);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  color: #b5b5d6;
+}
+
+/* ============================================================= */
+/* ===================== PLACE ORDER UI ======================== */
+/* ============================================================= */
+
+.order-wrapper {
+  max-width: 620px;
+  margin: 40px auto 60px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Product summary */
+.order-product {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 22px;
+}
+
+.order-product img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.order-product h2 {
+  font-size: 18px;
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.order-product .price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #d63384;
+}
+
+/* Form */
+.order-form .field {
+  margin-bottom: 14px;
+}
+
+.order-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.order-form input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.order-form input:focus {
+  outline: none;
+  border-color: #d63384;
+  box-shadow: 0 0 0 2px rgba(214, 51, 132, 0.15);
+}
+
+.field-row {
+  display: flex;
+  gap: 12px;
+}
+
+/* Place Order Button */
+.place-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.place-btn:hover {
+  background-color: #0b5ed7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ================= LOGIN REQUIRED MESSAGE ================= */
+
+.login-required-box {
+  text-align: center;
+  padding: 30px 20px;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+.login-required-box p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.login-required-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background-color: #0d6efd;
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.25s ease;
+}
+
+.login-required-btn:hover {
+  background-color: #0b5ed7;
+}

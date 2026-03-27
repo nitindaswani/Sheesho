@@ -1,0 +1,98 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ product.pro_name }} | Sheesho</title>
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}" />
+  </head>
+  <body>
+    {%include 'header.html'%}
+    <!-- ====================================================== -->
+
+    <!-- ================= PRODUCT DETAIL ================= -->
+    <main class="pd-wrapper">
+      <!-- TOP SECTION -->
+      <section class="pd-main">
+        <!-- LEFT: IMAGE -->
+        <div class="pd-image-box">
+          <img src="{{ product.pro_image.url }}" alt="{{ product.pro_name }}" />
+        </div>
+
+        <!-- RIGHT: DETAILS -->
+        <div class="pd-details">
+          <h1 class="pd-title">{{ product.pro_name }}</h1>
+
+          <div class="pd-price">₹ {{ product.pro_price }}</div>
+
+          <div class="pd-divider"></div>
+
+          <p class="pd-description">{{ product.pro_description }}</p>
+
+          <ul class="pd-features">
+            <li>✔ Premium quality materials</li>
+            <li>✔ 7-day easy returns</li>
+            <li>✔ Free & fast delivery</li>
+            <li>✔ Secure payments</li>
+          </ul>
+
+          <div class="pd-actions">
+            <a href="{% url 'orders:place_orders' product.pro_name product.pro_id %}" class="pd-buy">Buy Now</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- REVIEWS -->
+      <section class="pd-reviews">
+        <h2>Customer Reviews</h2>
+
+        {% for review in reviews %}
+        <div class="pd-review-card">
+          <div class="pd-review-top">
+            <span class="pd-review-user">{{ review.user.name }}</span>
+            <span class="pd-review-rating">⭐ {{ review.rating }}/5</span>
+          </div>
+          <p class="pd-review-text">{{ review.comment }}</p>
+          <small>{{ review.created_at }}</small>
+        </div>
+        {% empty %}
+        <p class="pd-no-review">No reviews yet.</p>
+        {% endfor %} {% if loggedin %}
+
+        <form method="POST" class="pd-review-form">
+          {% csrf_token %}
+          <h3>Write a review</h3>
+
+          <select name="rating" required>
+            <option value="">Select rating</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+
+          <textarea
+            name="comment"
+            placeholder="Share your experience"
+            required
+          ></textarea>
+
+          <button type="submit">Submit Review</button>
+        </form>
+        {% else %}
+        <div class="login-review-box">
+          <p>Want to share your experience?</p>
+          <a href="{% url 'login' %}?next={{ request.path }}" class="login-btn"
+            >Login to write a review</a
+          >
+        </div>
+
+        {% endif %}
+      </section>
+    </main>
+    <!-- ====================================================== -->
+
+{%include 'footer.html'%}    <!-- ====================================================== -->
+  </body>
+</html>

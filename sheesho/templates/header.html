@@ -1,0 +1,116 @@
+<style>
+  .header {
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .header-nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .header-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .header-nav a:hover {
+    color: #0d6efd;
+  }
+
+  .header-user {
+    display: flex;
+    gap: 15px;
+  }
+
+  .header-user a {
+    text-decoration: none;
+    color: #d63384;
+    background-color: white;
+    font-weight: 500;
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    border: 2px solid white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .header-user a:hover {
+    color: #ffffff;
+    background-color: #d63384;
+  }
+
+  .header-logo {
+    cursor: default;
+    padding: 0;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d63384;
+    text-decoration: none;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 15px;
+  }
+
+  /* Common link style */
+  .header-actions a {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+  }
+
+  /* Hover effect */
+  .header-actions a:hover {
+    background-color: #f2f2f2;
+  }
+
+  /* Logout button special styling */
+  .header-actions .logout {
+    color: #d63384;
+    border: 1px solid #d63384;
+  }
+
+  /* Logout hover */
+  .header-actions .logout:hover {
+    background-color: #d63384;
+    color: #ffffff;
+  }
+</style>
+
+<div class="header">
+  <p class="header-logo" href="/">Sheesho</p>
+  <div class="header-nav">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </div>
+
+  <div>
+    {% if loggedin %}
+    <div class="header-actions">
+      <a href="/orders/{{user.user_id}}/{{user.name}}">View Orders</a>
+      <a href="/logout/?next={{ request.path }}" class="logout">Logout</a>
+    </div>
+
+    {% else %}
+    <div class="header-user">
+      <a href="/login/?next={{ request.path }}">Login</a>
+      <a href="/register/?next={{ request.path }}">Register</a>
+    </div>
+    {% endif %}
+  </div>
+</div>

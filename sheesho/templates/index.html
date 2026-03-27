@@ -1,0 +1,53 @@
+{% load static %}
+<html>
+  <head>
+    <title>Sheesho</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    {%include 'header.html'%}
+
+    <!-- CATEGORY NAVBAR -->
+    <div class="category-bar">
+      <div class="category-nav">
+        {% for slug, name in categories %}
+        <a
+          href="?category={{ slug }}"
+          class="{% if active_category == slug %}active{% endif %}"
+        >
+          {{ name }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 30px">
+        <h2>Welcome to Sheesho!</h2>
+        <p>Your one-stop shop for everything you need.</p>
+      </div>
+
+      <div class="product-grid">
+        {%for pro in products%}
+        <div class="card">
+          <img class="card-img" src="{{pro.pro_image.url}}" alt="Image" />
+          <div class="card-body">
+            <h4 class="card-title">{{pro.pro_name}}</h4>
+            <p class="card-price">${{pro.pro_price}}</p>
+            <div class="card-actions">
+              <a
+                href="/{{pro.pro_name}}/{{pro.pro_id}}"
+                class="btn btn-primary"
+                style="width: 100%"
+                >Buy Now</a
+              >
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+
+    {%include 'footer.html'%}
+  </body>
+</html>

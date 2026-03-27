@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sheesho | All Orders</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/all_orders.css' %}">
+</head>
+<body>
+
+<button class="back-btn" onclick="history.back()">← Back</button>
+<div class="admin-badge">Sheesho Admin</div>
+
+<div class="page-wrapper">
+  <div class="orders-card">
+
+    <!-- Brand -->
+    <div class="brand-section">
+      <h1>Sheesho</h1>
+      <p>All Orders</p>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Name</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for o in orders %}
+          <tr>
+            <td>{{ o.order_id }}</td>
+            <td>{{ o.name }}</td>
+            <td>{{ o.ord_pro_name|default:"—" }}</td>
+            <td>₹{{ o.ord_price|default:"0" }}</td>
+            <td class="status {{ o.status }}">{{ o.status }}</td>
+            <td>{{ o.ord_date|date:"d M Y" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="empty">
+              No orders found
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
