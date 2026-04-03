@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,10 +11,12 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
   </head>
 
   <body>
+    <a href="{% url 'home:index' %}" class="auth-back-btn">&larr; Back</a>
+
     <div class="login-card">
       <h3 class="text-center mb-4">
         Login to <span class="brand">Sheesho</span>
@@ -68,22 +70,18 @@
         <p class="text-center mt-3">
           Don’t have an account?
           <a
-            href="/register/?next={{ request.GET.next }}""
+            href="/register/?next={{ request.GET.next }}"
             class="text-decoration-none"
             style="color: #e91e63"
           >
             Register
           </a>
         </p>
-        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
       </form>
     </div>
 
-    <div class="footer">
-      <h4>Contact us : XXXXX XXXXX</h4>
-      <p>Email : support@sheesho.com</p>
-      <p>Address : Sheesho Centre, Gurgaon</p>
-    </div>
+    {%include 'footer.html'%}
 
     {% if messages %} {% for message in messages %}
     <div id="popup" class="popup-success">{{ message }}</div>

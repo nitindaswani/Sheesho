@@ -48,5 +48,8 @@ def place_orders(request,pro_name,pro_id):
 
 
 def user_orders(request,user_id,name):
+    if not request.session.get("user_id"):
+        return redirect(f"/login/?next={request.path}")
+    
     context={"orders":orders.objects.filter(name=name),"loggedin": bool(request.session.get("user_id"))}
     return render(request,'user_orders.html',context)

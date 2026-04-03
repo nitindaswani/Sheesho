@@ -1,0 +1,89 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #f8f9fa;
+}
+
+body {
+	position: relative;
+}
+
+.verify-card {
+	max-width: 440px;
+	margin: 92px auto;
+	padding: 32px;
+	border-radius: 12px;
+	background: #ffffff;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.brand {
+	color: #e91e63;
+	font-weight: 700;
+}
+
+.verify-subtitle {
+	color: #6c757d;
+	font-size: 0.95rem;
+}
+
+.verify-email {
+	color: #212529;
+	font-weight: 600;
+	word-break: break-word;
+}
+
+.otp-input {
+	text-align: center;
+	letter-spacing: 0.35em;
+	font-size: 1.15rem;
+	font-weight: 600;
+}
+
+.auth-back-btn {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: rgba(233, 30, 99, 0.12);
+	color: #e91e63;
+	border: 1px solid rgba(233, 30, 99, 0.18);
+	padding: 8px 18px;
+	border-radius: 22px;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	backdrop-filter: blur(8px);
+	transition: all 0.3s ease;
+	text-decoration: none;
+	z-index: 10;
+}
+
+.auth-back-btn:hover {
+	background: rgba(233, 30, 99, 0.2);
+	color: #d81b60;
+	transform: translateY(-1px);
+}
+
+.btn-sheesho {
+	background-color: #e91e63;
+	color: #fff;
+	border: none;
+}
+
+.btn-sheesho:hover {
+	background-color: #d81b60;
+}
+
+@media (max-width: 576px) {
+	.verify-card {
+		margin: 76px 16px 24px;
+		padding: 24px;
+	}
+
+	.auth-back-btn {
+		top: 14px;
+		right: 14px;
+		padding: 7px 14px;
+	}
+}
